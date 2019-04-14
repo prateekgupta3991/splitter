@@ -1,0 +1,81 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.2.RELEASE'
+        mysqlConVersion = '5.1.40'
+        slf4jVersion = '1.7.25'
+        swaggerVersion = '2.9.2'
+        lombokVersion = '1.16.4'
+        depManagementVersion = '1.0.6.RELEASE'
+        springDataRedisVersion = '2.1.3.RELEASE'
+        jedisVersion = '2.10.2'
+        feignVersion = '2.1.1.RELEASE'
+        springCloudVersion = 'Greenwich.SR1'
+        feignClientVersion = '10.2.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath (group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}")
+        classpath (group: 'io.spring.gradle', name: 'dependency-management-plugin', version: "${depManagementVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: "org.springframework.boot"
+
+group 'com.up.split'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+springBoot {
+    mainClassName = 'com.splitter.SplitterApplication'
+}
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'splitter'
+}
+
+dependencies {
+    // slf4j
+    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+
+    // spring boot
+    compile (group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: "${springBootVersion}")
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter', version: "${springBootVersion}")
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}")
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: "${springBootVersion}")
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: "${springBootVersion}")
+
+    // MySQL
+    compile group: 'mysql', name: 'mysql-connector-java', version: "${mysqlConVersion}"
+
+    // swagger
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: "${swaggerVersion}"
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: "${swaggerVersion}"
+
+    // lombok
+    compile group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+
+    // amqp
+//    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: "${springBootVersion}")
+
+    // spring-data-redis and jedis
+//    compile group: 'org.springframework.data', name: 'spring-data-redis', version: "${springDataRedisVersion}"
+//    compile group: 'redis.clients', name: 'jedis', version: "${jedisVersion}"
+
+    //feign rest client
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: "${feignVersion}"
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-dependencies', version: "${springCloudVersion}"
+    compile group: 'io.github.openfeign', name: 'feign-okhttp', version: "${feignClientVersion}"
+
+    //test
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+}

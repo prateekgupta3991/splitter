@@ -28,7 +28,7 @@ public class Bill {
     @Column(name = "amount")
     private Double billAmount;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "gang_id")
     private Group gang;
 

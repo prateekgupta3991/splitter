@@ -32,7 +32,7 @@ public class User {
     @Column(name = "contact")
     private String contact;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserGroup> userGroup;
 
     public User(String nam, String email, String contact) {

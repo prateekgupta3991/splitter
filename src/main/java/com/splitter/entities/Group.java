@@ -26,10 +26,10 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "gang", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "gang", fetch = FetchType.LAZY)
     private List<UserGroup> userGroups;
 
-    @OneToMany(mappedBy = "gang", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "gang", fetch = FetchType.LAZY)
     private List<Bill> bills;
 
     @OneToOne

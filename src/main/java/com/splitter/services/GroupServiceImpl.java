@@ -48,12 +48,15 @@ public class GroupServiceImpl implements GroupService {
                 .adminUser(admin)
                 .build();
         groupRepository.save(group);
+
+        List<UserGroup> userGroupList = new ArrayList<>();
         for (User user : members) {
             UserGroup usrGrp = new UserGroup(user);
             usrGrp.setGang(group);
             userGroupRepository.save(usrGrp);
+            userGroupList.add(usrGrp);
         }
-
+        group.setUserGroups(userGroupList);
         GroupResponseDto dto = getGroupResponseDto(group);
         return dto;
     }

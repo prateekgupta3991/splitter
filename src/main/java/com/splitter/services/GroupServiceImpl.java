@@ -36,7 +36,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Transactional
     @Override
-    public Group addNewGroup(GroupRequestDto groupRequestDto) throws CustomerNotFoundException {
+    public GroupResponseDto addNewGroup(GroupRequestDto groupRequestDto) throws CustomerNotFoundException {
         if (groupRequestDto.getUserEmails() == null || groupRequestDto.getUserEmails().isEmpty()) {
             throw new GroupWithoutAdminException("User list is empty. Group without admin not possible!!!");
         }
@@ -53,7 +53,36 @@ public class GroupServiceImpl implements GroupService {
             usrGrp.setGang(group);
             userGroupRepository.save(usrGrp);
         }
-        return group;
+
+        GroupResponseDto dto = getGroupResponseDto(group);
+        return dto;
+    }
+
+    private GroupResponseDto getGroupResponseDto(Group group) {
+
+        UserResponseDto adminDto = UserResponseDto.builder()
+                .name(group.getAdminUser().getName())
+                .email(group.getAdminUser().getEmail())
+                .contact(group.getAdminUser().getContact())
+                .build();
+
+        List<UserResponseDto> userList = new ArrayList<>();
+        for (UserGroup usrgrp : group.getUserGroups()) {
+            UserResponseDto responseDto = UserResponseDto.builder()
+                    .name(usrgrp.getUser().getName())
+                    .email(usrgrp.getUser().getEmail())
+                    .contact(usrgrp.getUser().getContact())
+                    .build();
+            userList.add(responseDto);
+        }
+
+        GroupResponseDto dto = GroupResponseDto.builder()
+                .id(group.getId())
+                .admin(adminDto)
+                .name(group.getName())
+                .users(userList)
+                .build();
+        return dto;
     }
 
     @Transactional(readOnly = true)
@@ -67,26 +96,7 @@ public class GroupServiceImpl implements GroupService {
     private List<GroupResponseDto> convertEntityToDto(List<Group> groups) {
         List<GroupResponseDto> dtos = new ArrayList<>();
         for (Group grp : groups) {
-            UserResponseDto adminDto = UserResponseDto.builder()
-                    .name(grp.getAdminUser().getName())
-                    .email(grp.getAdminUser().getEmail())
-                    .contact(grp.getAdminUser().getContact())
-                    .build();
-            List<UserResponseDto> userList = new ArrayList<>();
-            for (UserGroup usrgrp : grp.getUserGroups()) {
-                UserResponseDto responseDto = UserResponseDto.builder()
-                        .name(usrgrp.getUser().getName())
-                        .email(usrgrp.getUser().getEmail())
-                        .contact(usrgrp.getUser().getContact())
-                        .build();
-                userList.add(responseDto);
-            }
-            GroupResponseDto dto = GroupResponseDto.builder()
-                    .id(grp.getId())
-                    .admin(adminDto)
-                    .name(grp.getName())
-                    .users(userList)
-                    .build();
+            GroupResponseDto dto = getGroupResponseDto(grp);
             dtos.add(dto);
         }
         return dtos;

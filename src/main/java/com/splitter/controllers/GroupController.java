@@ -30,9 +30,9 @@ public class GroupController extends AbstractController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Group> createNewGroup(@RequestBody GroupRequestDto json) {
+    public ResponseEntity<GroupResponseDto> createNewGroup(@RequestBody GroupRequestDto json) {
 
-        Group group = groupServiceImpl.addNewGroup(json);
+        GroupResponseDto group = groupServiceImpl.addNewGroup(json);
         return new ResponseEntity<>(group, HttpStatus.OK);
     }
 

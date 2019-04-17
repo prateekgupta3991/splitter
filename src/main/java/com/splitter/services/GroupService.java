@@ -3,7 +3,6 @@ package com.splitter.services;
 
 import com.splitter.dto.GroupRequestDto;
 import com.splitter.dto.GroupResponseDto;
-import com.splitter.entities.Group;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  */
 public interface GroupService {
 
-    Group addNewGroup(GroupRequestDto groupRequestDto);
+    GroupResponseDto addNewGroup(GroupRequestDto groupRequestDto);
 
     List<GroupResponseDto> getAllGroups();
 

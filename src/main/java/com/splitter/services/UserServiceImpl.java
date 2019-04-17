@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
         List<UserResponseDto> dtoList = new ArrayList<>();
         for (User usr : users) {
             UserResponseDto dto = UserResponseDto.builder()
+                    .id(usr.getId())
                     .name(usr.getName())
                     .email(usr.getEmail())
                     .contact(usr.getContact())

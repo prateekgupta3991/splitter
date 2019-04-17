@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto getUser(Long userId) {
         User user = userRepository.findById(userId).get();
         UserResponseDto userResponseDto = UserResponseDto.builder()
+                .id(userId)
                 .name(user.getName())
                 .email(user.getEmail())
                 .contact(user.getContact())

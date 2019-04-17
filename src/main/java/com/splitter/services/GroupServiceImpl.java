@@ -64,6 +64,7 @@ public class GroupServiceImpl implements GroupService {
     private GroupResponseDto getGroupResponseDto(Group group) {
 
         UserResponseDto adminDto = UserResponseDto.builder()
+                .id(group.getAdminUser().getId())
                 .name(group.getAdminUser().getName())
                 .email(group.getAdminUser().getEmail())
                 .contact(group.getAdminUser().getContact())
@@ -72,6 +73,7 @@ public class GroupServiceImpl implements GroupService {
         List<UserResponseDto> userList = new ArrayList<>();
         for (UserGroup usrgrp : group.getUserGroups()) {
             UserResponseDto responseDto = UserResponseDto.builder()
+                    .id(usrgrp.getUser().getId())
                     .name(usrgrp.getUser().getName())
                     .email(usrgrp.getUser().getEmail())
                     .contact(usrgrp.getUser().getContact())

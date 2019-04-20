@@ -67,4 +67,18 @@ public class UserServiceImpl implements UserService {
                 .build();
         return userResponseDto;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public UserResponseDto getUserByEmailId(String emailId) {
+
+        User user = userRepository.findByEmail(emailId);
+        UserResponseDto userResponseDto = UserResponseDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .contact(user.getContact())
+                .build();
+        return userResponseDto;
+    }
 }

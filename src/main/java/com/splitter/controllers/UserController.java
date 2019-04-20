@@ -49,4 +49,11 @@ public class UserController extends AbstractController {
         UserResponseDto user = userServiceImpl.getUser(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/email")
+    public ResponseEntity<UserResponseDto> getUserByEmailId(@RequestParam(value = "emailId") String emailId) {
+
+        UserResponseDto user = userServiceImpl.getUserByEmailId(emailId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 }

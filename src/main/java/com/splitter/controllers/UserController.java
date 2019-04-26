@@ -3,6 +3,7 @@ package com.splitter.controllers;
 import com.splitter.dto.UserNetWorthDto;
 import com.splitter.dto.UserRequestDto;
 import com.splitter.dto.UserResponseDto;
+import com.splitter.dto.UsersAllGangsDto;
 import com.splitter.entities.User;
 import com.splitter.services.UserAssetLiabilitiesService;
 import com.splitter.services.UserService;
@@ -66,6 +67,13 @@ public class UserController extends AbstractController {
     public ResponseEntity<UserNetWorthDto> getMyNetWorth(@PathVariable(value = "userid") Long userId) {
 
         UserNetWorthDto userNetWorth = userAssetLiabilitiesService.getMyNetWorth(userId);
+        return new ResponseEntity<>(userNetWorth, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{userid}/gangs")
+    public ResponseEntity<UsersAllGangsDto> getAllMyGangs(@PathVariable(value = "userid") Long userId) {
+
+        UsersAllGangsDto userNetWorth = userAssetLiabilitiesService.getMyGroupwiseNetWorth(userId);
         return new ResponseEntity<>(userNetWorth, HttpStatus.OK);
     }
 }

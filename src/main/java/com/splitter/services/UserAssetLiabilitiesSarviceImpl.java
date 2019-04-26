@@ -1,7 +1,9 @@
 package com.splitter.services;
 
 import com.splitter.dto.AssetLiabilitiesDto;
+import com.splitter.dto.GroupExpensesDto;
 import com.splitter.dto.UserNetWorthDto;
+import com.splitter.dto.UsersAllGangsDto;
 import com.splitter.entities.BillUserGroup;
 import com.splitter.enums.BillStatus;
 import com.splitter.repositories.BillUserGroupRepository;
@@ -47,5 +49,28 @@ public class UserAssetLiabilitiesSarviceImpl implements UserAssetLiabilitiesServ
                 .id(userId)
                 .build();
         return userNetWorthDto;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public UsersAllGangsDto getMyGroupwiseNetWorth(Long userId) {
+
+        List<GroupExpensesDto> expensesDtos = new ArrayList<>();
+        List<BillUserGroup> billUserGroupList = billUserGroupRepository.findByUserId(userId, Byte.valueOf(BillStatus.ACTIVE.getId().toString()));
+        for (BillUserGroup billUserGroup : billUserGroupList) {
+
+            GroupExpensesDto groupExpensesDto = GroupExpensesDto.builder()
+                    .groupName(billUserGroup.getBill().getGang().getName())
+                    .share(billUserGroup.getShare())
+                    .build();
+            expensesDtos.add(groupExpensesDto);
+        }
+
+        UsersAllGangsDto usersAllGangsDto = UsersAllGangsDto.builder()
+                .id(userId)
+                .name(billUserGroupList.get(0).getUser().getName())
+                .groupExpenses(expensesDtos)
+                .build();
+        return usersAllGangsDto;
     }
 }

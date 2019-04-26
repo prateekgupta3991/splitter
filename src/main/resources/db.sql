@@ -41,3 +41,19 @@ CREATE TABLE `bill_user_gang` (
   CONSTRAINT `fk5` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`id`),
   CONSTRAINT `fk6` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 )
+
+alter table bill add column status tinyint(3) not null default 1;
+alter table bill add column created_at datetime not null default current_timestamp;
+alter table bill add column updated_at datetime not null default current_timestamp on update current_timestamp;
+
+alter table gang add column created_at datetime not null default current_timestamp;
+alter table gang add column updated_at datetime not null default current_timestamp on update current_timestamp;
+
+alter table user add column created_at datetime not null default current_timestamp;
+alter table user add column updated_at datetime not null default current_timestamp on update current_timestamp;
+
+alter table user_gang add column created_at datetime not null default current_timestamp;
+alter table user_gang add column updated_at datetime not null default current_timestamp on update current_timestamp;
+
+alter table bill_user_gang add column created_at datetime not null default current_timestamp;
+alter table bill_user_gang add column updated_at datetime not null default current_timestamp on update current_timestamp;

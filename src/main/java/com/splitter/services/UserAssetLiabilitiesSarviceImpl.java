@@ -28,7 +28,7 @@ public class UserAssetLiabilitiesSarviceImpl implements UserAssetLiabilitiesServ
         List<BillUserGroup> billUserGroupList = billUserGroupRepository.findByUserId(userId, Byte.valueOf(BillStatus.ACTIVE.getId().toString()));
         for (BillUserGroup billUserGroup : billUserGroupList) {
 
-            Double.sum(netWorth, billUserGroup.getShare());
+            netWorth = Double.sum(netWorth, billUserGroup.getShare());
             AssetLiabilitiesDto assetLiabilitiesDto = AssetLiabilitiesDto.builder()
                     .billName(billUserGroup.getBill().getName())
                     .share(billUserGroup.getShare())
@@ -44,6 +44,7 @@ public class UserAssetLiabilitiesSarviceImpl implements UserAssetLiabilitiesServ
                 .assets(assets)
                 .liabilities(liabilities)
                 .netWorth(netWorth)
+                .id(userId)
                 .build();
         return userNetWorthDto;
     }

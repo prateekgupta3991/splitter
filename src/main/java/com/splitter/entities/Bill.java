@@ -8,14 +8,12 @@ import javax.persistence.*;
  * Created by prateekgupta on 09/09/17.
  */
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Table(name = "bill")
 @Entity
-public class Bill {
+public class Bill extends SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +29,9 @@ public class Bill {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "gang_id")
     private Group gang;
+
+    @Column(name = "status")
+    private Byte status;
 
     public Bill(String name, Double billAmount, Group gang) {
         this.name = name;

@@ -9,14 +9,12 @@ import java.util.List;
  * Created by prateekgupta on 09/09/17.
  */
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Table(name = "user")
 @Entity
-public class User {
+public class User  extends SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

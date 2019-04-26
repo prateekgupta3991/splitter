@@ -1,5 +1,6 @@
 package com.splitter.services;
 
+import com.splitter.dto.UserNetWorthDto;
 import com.splitter.dto.UserRequestDto;
 import com.splitter.dto.UserResponseDto;
 import com.splitter.entities.User;

@@ -1,6 +1,7 @@
 package com.splitter.services;
 
 
+import com.splitter.dto.UserNetWorthDto;
 import com.splitter.dto.UserRequestDto;
 import com.splitter.dto.UserResponseDto;
 import com.splitter.entities.User;
@@ -19,4 +20,5 @@ public interface UserService {
     UserResponseDto getUser(Long userId);
 
     UserResponseDto getUserByEmailId(String emailId);
+
 }

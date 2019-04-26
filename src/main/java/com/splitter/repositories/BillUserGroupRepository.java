@@ -12,4 +12,7 @@ public interface BillUserGroupRepository extends JpaRepository<BillUserGroup, Lo
 
     @Query("select bug from BillUserGroup bug where bug.bill.id = :billId")
     List<BillUserGroup> findByBillId(Long billId);
+
+    @Query("select bug from BillUserGroup bug where bug.user.id = :userId and bug.status = :status")
+    List<BillUserGroup> findByUserId(Long userId, Byte status);
 }

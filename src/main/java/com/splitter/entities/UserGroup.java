@@ -8,14 +8,12 @@ import javax.persistence.*;
  * Created by prateekgupta on 09/09/17.
  */
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Table(name = "user_gang")
 @Entity
-public class UserGroup {
+public class UserGroup  extends SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

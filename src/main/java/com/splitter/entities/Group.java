@@ -9,14 +9,12 @@ import java.util.List;
  * Created by prateekgupta on 09/09/17.
  */
 @Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Table(name = "gang")
 @Entity
-public class Group {
+public class Group  extends SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

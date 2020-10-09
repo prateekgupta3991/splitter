@@ -18,5 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SplitterApplication {
     public static void main(String[] args) {
         SpringApplication.run(SplitterApplication.class, args);
+        System.out.println("Test");
     }
 }
